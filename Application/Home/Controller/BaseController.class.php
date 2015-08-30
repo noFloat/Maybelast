@@ -9,7 +9,7 @@ class BaseController extends Controller {
             $this->display('Login/index');
             exit;
         } else {
-            $user_con = session('user_con');
+            $user_con = 'logout';
             $user = session('user');
             $this->assign('user',$user);
             $this->assign('user_con',$user_con);

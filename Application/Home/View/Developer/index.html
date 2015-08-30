@@ -13,31 +13,34 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="panel-873605">
                                 <table class="table table-striped">
-                                   <caption>条纹表格布局</caption>
+                                   <caption>可管理用户</caption>
                                    <thead>
                                       <tr>
-                                         <th>名称</th>
-                                         <th>城市</th>
-                                         <th>密码</th>
+                                         <th>姓名</th>
+                                         <th>最后登录时间</th>
+                                         <th>qq</th>
+                                         <th>权限</th>
                                       </tr>
                                    </thead>
-                                   <tbody>
-                                      <tr>
-                                         <td>Tanmay</td>
-                                         <td>Bangalore</td>
-                                         <td>560001</td>
-                                      </tr>
-                                      <tr>
-                                         <td>Sachin</td>
-                                         <td>Mumbai</td>
-                                         <td>400003</td>
-                                      </tr>
-                                      <tr>
-                                         <td>Uma</td>
-                                         <td>Pune</td>
-                                         <td>411027</td>
-                                      </tr>
-                                   </tbody>
+                                   <volist name="list" id="low_user">
+                                     <tbody>
+                                        <tr>
+                                           <td>{$low_user.nick_name}</td>
+                                           <td>{$low_user.last_login}</td>
+                                           <td>{$low_user.qq}</td>
+                                           <input type="hidden" name="id" id="user_id"  value="{$low_user.id}">
+                                           <td> 
+                                              <div class="col-lg-6">
+                                                  <div class="input-group">
+                                                     <input type="text" class="form-control" maxlength="1" placeholder = "设置123" id = "access" onpaste="return false;" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                                                  </div>
+                                              </div>
+                                            </td>
+                                            <td> <button type="submit" class="btn btn-default" id = "sub">提交</button></td>
+                                        </tr>
+                                     </tbody>
+                                   </volist>
+                                     {$page}
                                 </table>
                             </div>
                             <div class="tab-pane" id="panel-411320">
@@ -51,3 +54,30 @@
             </div>
         </div>
     <include file="Layout:footer" />
+        <script>
+          (function(){
+              $("#sub").click(function(){
+                var reg = new RegExp("^[2-3]*$");
+                var user_id=$("#user_id").val(),
+                    access=$("#access").val();
+                if(!reg.test(access)){
+                  alert("请输入2-3");
+                 }else{ 
+                    $.post("{:U('Developer/changeAccess')}",
+                    {
+                      user_id:user_id,
+                      access:access
+                    },
+                    function(data,status){
+
+                    if(data == 1){
+                      alert('成功');
+                    }else{
+                      alert('失败');
+                    }
+                     parent.location.reload();
+                    });
+                }
+              });
+            })();
+      </script>

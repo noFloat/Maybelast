@@ -4,10 +4,10 @@ use Think\Controller;
 
 class AdminController extends BaseController {
     public function index(){
+        $this->user_info();
     	if(session('user_role') > 1) {
 			$this->error('您没有权限访问');
 		}else{
-			$this->user_info();
 			$this->display('Admin/index');
 		}
     }
@@ -20,17 +20,7 @@ class AdminController extends BaseController {
     	$count= $User->where($condition)->count();
     	$Page = new \Think\Page($count,10);
     	$show  = $Page->show();
-
-    	// for($i = 0 ;$i < $count;$i++){
-    	// 	echo $user_role[$i]['user_id']."</br>";
-    	// 	$condition3['id'] = $user_role[$i]['user_id'];
-    	// 	$list_in = $user_in->where($condition3)->find();
-    	// 	var_dump($list_in);
-    	// 	echo "</br>";
-    	// 	array_push($list,$list_in);
-    	// }
     	$list = $User->join('back_user ON back_role_user.user_id = back_user.id')->where($condition)->limit($Page->firstRow.','.$Page->listRows)->select();
-
     	$this->assign('list',$list);
     	$this->assign('page',$Page);	
     }

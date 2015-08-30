@@ -7,7 +7,7 @@
                                 <a href="#panel-873605" data-toggle="tab">Admin/用户管理</a>
                             </li>
                             <li>
-                                <a href="#panel-411320" data-toggle="tab">第二部分</a>
+                                <a href="#panel-411320" data-toggle="tab">用户数据</a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -37,9 +37,27 @@
                                 </table>
                             </div>
                             <div class="tab-pane" id="panel-411320">
-                                <p>
-                                    第二部分内容.
-                                </p>
+                                <table class="table table-striped">
+                                   <caption>可管理用户</caption>
+                                   <thead>
+                                      <tr>
+                                         <th>姓名</th>
+                                         <th>登陆次数</th>
+                                         <th>监视用户id</th>
+                                      </tr>
+                                   </thead>
+                                   <volist name="list" id="low_user">
+                                     <tbody>
+                                        <tr>
+                                           <td>{$low_user.user_name}</td>
+                                           <td>{$low_user.login_time}</td>
+                                           <td>{$low_user.bind_user_name}</td>
+                                           <input type="hidden" name="id" id="user_id"  value="{$low_user.id}">
+                                        </tr>
+                                     </tbody>
+                                   </volist>
+                                     {$page}
+                                </table>
                             </div>
                         </div>
                     </div>

@@ -4,15 +4,16 @@ use Think\Controller;
 
 class IndexController extends Controller {
     public function index(){
-    	echo session('user_nickname');
     	if(session('user_nickname') == 'visitor' || !session('?user_nickname')){
     		session('user_nickname' ,'visitor');
-    		$user_con['content'] = 'login';
-    		$this->assign('user_con',$user_con);
+    		$this->assign('user_con','login');
 	        session('user_nickname','visitor');
 	        $visitor['nick_name'] = session('user_nickname');
 	        $this->assign('user',$visitor);
     	}else{
+            $this->assign('user_con','logout');
+            $visitor['nick_name'] = session('user_nickname');
+            $this->assign('user',$visitor);
     	}
 			$this->display('Index/index');
     }

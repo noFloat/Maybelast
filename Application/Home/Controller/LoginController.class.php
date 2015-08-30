@@ -28,6 +28,7 @@ class LoginController extends Controller {
             $this->assign('user_con',$user_con);
     		$this->initSession($user);
     		$content['last_login'] = date("Y-m-d H:i:s", time());
+            $cinfo->where($condition)->setInc('login_time',1);
     		$cinfo->where($condition)->save($content);
             $this->position();
     	}elseif(session('testnum') == 5){

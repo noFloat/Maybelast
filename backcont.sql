@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50619
 File Encoding         : 65001
 
-Date: 2015-08-30 14:40:11
+Date: 2015-08-30 20:17:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -54,16 +54,18 @@ CREATE TABLE `back_node` (
   KEY `pid` (`pid`),
   KEY `status` (`status`),
   KEY `name` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of back_node
 -- ----------------------------
-INSERT INTO `back_node` VALUES ('1', 'Developer', '开发者', '1', null, null, '0', '2');
-INSERT INTO `back_node` VALUES ('2', 'Admin', '管理员', '1', null, null, '1', '2');
-INSERT INTO `back_node` VALUES ('3', 'User', '用户', '1', null, null, '2', '2');
-INSERT INTO `back_node` VALUES ('4', 'Visiter', '游客', '1', null, null, '3', '2');
-INSERT INTO `back_node` VALUES ('5', 'forbid', '禁言', '1', null, null, '1', '3');
+INSERT INTO `back_node` VALUES ('1', 'Developer', '开发者', '1', null, null, '7', '2');
+INSERT INTO `back_node` VALUES ('2', 'Admin', '管理员', '1', null, null, '7', '2');
+INSERT INTO `back_node` VALUES ('3', 'User', '用户', '1', null, null, '7', '2');
+INSERT INTO `back_node` VALUES ('4', 'Visiter', '游客', '1', null, null, '7', '2');
+INSERT INTO `back_node` VALUES ('5', 'userController', '用户管理', '1', null, null, '2', '3');
+INSERT INTO `back_node` VALUES ('6', 'userDate', '用户数据', '1', null, null, '2', '3');
+INSERT INTO `back_node` VALUES ('7', 'app', '项目', '1', null, null, '0', '0');
 
 -- ----------------------------
 -- Table structure for `back_role`
@@ -132,7 +134,7 @@ CREATE TABLE `back_user` (
 -- ----------------------------
 -- Records of back_user
 -- ----------------------------
-INSERT INTO `back_user` VALUES ('1', 'develop', '开发者', '123456', null, '2015-08-30 11:57:06', '0', '0', '1', null);
-INSERT INTO `back_user` VALUES ('2', 'admin', '管理员1', '123456', null, '2015-08-30 14:30:21', '0', '0', '1', null);
-INSERT INTO `back_user` VALUES ('3', 'user1', '用户1', '123456', null, '2015-08-30 14:13:32', '0', '0', '1', null);
+INSERT INTO `back_user` VALUES ('1', 'develop', '开发者', '123123', null, '2015-08-30 18:48:42', '0', '123456', '1', null);
+INSERT INTO `back_user` VALUES ('2', 'admin', '管理员1', '123456', null, '2015-08-30 19:58:14', '3', '0', '1', null);
+INSERT INTO `back_user` VALUES ('3', 'user1', '用户1', '123456', '4', '2015-08-30 19:52:42', '1', '0', '1', null);
 INSERT INTO `back_user` VALUES ('4', 'user2', '用户2', '123456', null, '2015-08-30 14:37:14', '0', '0', '1', null);

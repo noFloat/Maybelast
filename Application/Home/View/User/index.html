@@ -12,33 +12,59 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="panel-873605">
-                                <table class="table table-striped">
-                                   <caption>条纹表格布局</caption>
-                                   <thead>
-                                      <tr>
-                                         <th>名称</th>
-                                         <th>城市</th>
-                                         <th>密码</th>
-                                      </tr>
-                                   </thead>
-                                   <tbody>
-                                      <tr>
-                                         <td>Tanmay</td>
-                                         <td>Bangalore</td>
-                                         <td>560001</td>
-                                      </tr>
-                                      <tr>
-                                         <td>Sachin</td>
-                                         <td>Mumbai</td>
-                                         <td>400003</td>
-                                      </tr>
-                                      <tr>
-                                         <td>Uma</td>
-                                         <td>Pune</td>
-                                         <td>411027</td>
-                                      </tr>
-                                   </tbody>
-                                </table>
+                                  <div id="tab-account-setting" class="">
+                                        <form action="" class="form-horizontal">
+                                            <div class="form-body">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">qq</label>
+                                                    <div class="col-sm-9 controls">
+                                                         <div class="row">
+                                                            <div class="col-xs-6">
+                                                                <input type="" placeholder="数字" class="form-control" id = "user_qq" maxlength = "11" onpaste="return false;"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">原密码</label>
+                                                    <div class="col-sm-9 controls">
+                                                        <div class="row">
+                                                            <div class="col-xs-6">
+                                                                <input type="password" placeholder="" class="form-control" id = "origin_password" maxlength= "10" onpaste="return false;" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>    
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">密码</label>
+                                                    <div class="col-sm-9 controls">
+                                                        <div class="row">
+                                                            <div class="col-xs-6">
+                                                                <input type="password" placeholder="" class="form-control" id = "new_password" maxlength= "10" onpaste="return false;" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">确认密码</label>
+                                                    <div class="col-sm-9 controls">
+                                                        <div class="row">
+                                                            <div class="col-xs-6">
+                                                                <input type="password" placeholder="" class="form-control" id ="confirm_password" maxlength = "10" onpaste="return false;"  />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mbn">
+                                                    <label class="col-sm-3 control-label"></label>
+                                                    <div class="col-sm-9 controls">
+                                                        <button type="submit" class="btn btn-success" id = "click_password"><i class="fa fa-save"></i>&nbsp; Save
+                                                        </button>&nbsp; &nbsp;<a href="#" class="btn btn-default">Cancel</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                             </div>
                             <div class="tab-pane" id="panel-411320">
                                 <p>
@@ -50,4 +76,43 @@
                 </div>
             </div>
         </div>
+                <script>
+          (function(){
+              $("#click_password").click(function(){
+                  var new_password=$("#new_password").val();
+                  var confirm_password=$("#confirm_password").val();
+                  var user_qq=$("#user_qq").val();
+                  var origin_password=$("#origin_password").val();
+                  if(user_qq.length<5){
+                      alert('正确qq');
+                  }else if(new_password != confirm_password){
+                      alert('请输入相同密码');
+                  }else if(!new_password){
+                      alert('请输入');
+                  }else if(new_password.length > 10 || new_password.length<6){
+                      alert('请输入6到10位密码');
+                  }else{
+                      $.post("{:U('User/changeInfo')}",
+                      {
+                        origin_password:origin_password,
+                        new_password:new_password,
+                        confirm_password:confirm_password,
+                        user_qq:user_qq
+                      },
+                      function(data,status){
+                          if(data == 0){
+                            alert('输入信息有误');
+                          }else{
+                              alert(data);
+                          }
+
+                        // json = JSON.parse(data)[0];
+                        // for(var key in json){
+
+                        // }
+                      });                
+                  }
+              });
+          })(); 
+          </script>
     <include file="Layout:footer" />
