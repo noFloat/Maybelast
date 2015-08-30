@@ -18,9 +18,13 @@ class LoginController extends Controller {
     	$condition['user_name'] = $this->user_name;
     	$condition['password'] = $this->password;
     	$user = $cinfo->where($condition)->find();
-    	if($user){
+        session('user',$user);
+    	if($user['status'] == "0"){
+            $this->error('您的号被封');
+        }elseif($user){
             $this->assign('user',$user);
             $user_con['content'] = 'logout';
+            session('user_con','logout');
             $this->assign('user_con',$user_con);
     		$this->initSession($user);
     		$content['last_login'] = date("Y-m-d H:i:s", time());

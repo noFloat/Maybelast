@@ -17,8 +17,9 @@
                                    <thead>
                                       <tr>
                                          <th>姓名</th>
-                                         <th>权限等级</th>
+                                         <th>最后登录时间</th>
                                          <th>qq</th>
+                                         <th>禁</th>
                                       </tr>
                                    </thead>
                                    <volist name="list" id="low_user">
@@ -27,6 +28,8 @@
                                            <td>{$low_user.nick_name}</td>
                                            <td>{$low_user.last_login}</td>
                                            <td>{$low_user.qq}</td>
+                                           <input type="hidden" name="id" id="user_id"  value="{$low_user.id}">
+                                           <td> <button type="submit" class="btn btn-default" id = "forbid">禁言</button></td>
                                         </tr>
                                      </tbody>
                                    </volist>
@@ -44,3 +47,23 @@
             </div>
         </div>
     <include file="Layout:footer" />
+    <script>
+      (function(){
+          $("#forbid").click(function(){
+            var user_id=$("#user_id").val();
+            $.post("{:U('Admin/forbid')}",
+            {
+              user_id:user_id,
+            },
+            function(data,status){
+
+            if(data == 1){
+              alert('成功');
+            }else{
+              alert('失败');
+            }
+             parent.location.reload();
+            });
+          });
+        })();
+    </script>
